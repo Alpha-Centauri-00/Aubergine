@@ -8,7 +8,7 @@ from turtle import onclick
 #from click import command
 #from setuptools import Command
 
-
+# should be main class
 class The_App():
     def __init__(self):
         
