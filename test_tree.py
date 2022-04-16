@@ -15,34 +15,18 @@ class TestCasesFinder(SuiteVisitor):
         self.files = glob.glob("*.robot")
         self.contacts = []
         for n in self.files:
-            self.contacts = []
-            #print(contacts.append((f'{n}')))
-            #print(n)
             self.contacts.append(n)
-            print(self.contacts)
+            for i in n.split():
+                self.finder = TestCasesFinder()
+                self.builder = TestSuiteBuilder()
+                self.testsuite = self.builder.build(str(i))
+                self.testsuite.visit(self.finder)
+                self.testname = self.finder.tests
+                for d in self.testname:
+                    print(n,d)
+                    #return n,d
+            
+            
+d = TestCasesFinder()
+d.get_all_files()
         
-        
-finder = TestCasesFinder()
-builder = TestSuiteBuilder()
-listy = finder.get_all_files()
-
-
-testsuite = builder.build("01_robot-file.robot")
-testsuite.visit(finder)
-
-#testy = TestCasesFinder
-#testy.get_all_files()
-print(*finder.tests)    
-
-
-# for x in all_names:
-    
-    
-#     builder = TestSuiteBuilder()
-    
-#     testsuite = builder.build(x)
-#     testsuite.visit(finder)
-
-# #testy = TestCasesFinder
-# #testy.get_all_files()
-#     print(*finder.tests)
