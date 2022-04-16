@@ -21,8 +21,15 @@ class The_App():
         self.root.title('Run Robot Test Cases')
         self.root.geometry('720x200')
         self.columns = ('first_name')   # define columns
-        self.tree = ttk.Treeview(self.root, columns=self.columns, show='headings')
-        self.tree.heading('first_name', text='Test Cases')  # define headings
+        self.tree = ttk.Treeview(self.root)
+        #self.tree.heading('first_name', text='Test Cases')  # define headings
+        self.tree.insert('', '0', 'i1', text ='Root')
+        self.tree.insert('', '1', 'i2', text ='Test Cases')
+        #self.tree.insert('', '2', 'i3', text ='Mechanical_Engg')
+        
+        self.tree.move('i2', 'i1', 'end')
+        #self.tree.move('i3', 'i1', 'end')
+        #self.tree.move('i4', 'i1', 'end')
         # tree.heading('last_name', text='Last Name')
         # tree.heading('email', text='Email')
 
@@ -35,7 +42,10 @@ class The_App():
 
         # add data to the treeview
         for contact in contacts:
-            self.tree.insert('', tk.END, values=contact)
+            self.tree.insert('i2', 'end',text=contact,values=contact)
+            #self.checky = tk.Checkbutton(self.root, text=contact)
+            
+            #self.tree.move('i2', 'i1', 'end')
 
         def selected_Testcase():
             curItem = self.tree.focus()
@@ -46,7 +56,7 @@ class The_App():
             for item in self.tree.selection():
                     item_text = self.tree.item(item)
                     text_is = item_text['values']
-                    my_label.config(text="robot "+ text_is[0])
+                    my_label.config(text=text_is)
             
 
         my_label = ttk.Label(self.root,text="")
