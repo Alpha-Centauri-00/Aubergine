@@ -35,20 +35,19 @@ class App(tk.Frame):
         DelJob_but.pack()
 
     def adding_job(self):
+        # adding new job according to the time!
         The_Hours = self.hourstr.get()
         The_Min = self.minstr.get()
         timeing = The_Hours + ":" + The_Min
         self.tree.insert('', 'end',text= "1",values=('Every Day', timeing,""))
 
     def deleteing_job(self):
-        # Get selected item to Delete
-        
-        if self.tree.selection()[0]:
-            selected_item = self.tree.selection()[0]
-            print(selected_item)
-            self.tree.delete(selected_item)
-        else:
+        # Get selected job to Delete
+        if len(self.tree.selection()) == 0:
             return None
+        else:
+            selected_item = self.tree.selection()[0]
+            self.tree.delete(selected_item)
 
     def trace_var(self,*args):
         if self.last_value == "59" and self.minstr.get() == "0":
