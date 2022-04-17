@@ -19,13 +19,13 @@ class App(tk.Frame):
         self.min.grid(row=0,column=1)
     
     def initialize_table(self):
-        self.tree= ttk.Treeview(root, column=("c1", "c2","c3"), show= 'headings')
+        self.tree= ttk.Treeview(root, column=("c1", "c2"), show= 'headings')
         self.tree.column("# 1",anchor='center')
         self.tree.heading("# 1", text= "Jobs")
         self.tree.column("# 2", anchor= 'center')
         self.tree.heading("# 2", text= "Timeing")
-        self.tree.column("# 3", anchor= 'center')
-        self.tree.heading("# 3", text="Notes")
+        # self.tree.column("# 3", anchor= 'center')
+        # self.tree.heading("# 3", text="Notes")
         self.tree.pack()
         
         AddJob_but = tk.Button(text="Add Job",command=self.adding_job)
@@ -34,6 +34,9 @@ class App(tk.Frame):
         DelJob_but = tk.Button(text="Del Job",command=self.deleteing_job)
         DelJob_but.pack()
 
+        test_get_value_but = tk.Button(text="get_val",command=self.get_tree_val)
+        test_get_value_but.pack()
+    
     def adding_job(self):
         # adding new job according to the time!
         The_Hours = self.hourstr.get()
@@ -53,6 +56,15 @@ class App(tk.Frame):
         if self.last_value == "59" and self.minstr.get() == "0":
             self.hourstr.set(int(self.hourstr.get())+1 if self.hourstr.get() !="23" else 0)
         self.last_value = self.minstr.get()
+    
+    def get_tree_val(self):
+        for line in self.tree.get_children():
+            for value in self.tree.item(line)['values']:
+                str1 = "Every Day"
+                print(value.replace(str1,'').replace(' ','').strip())
+    #             #print(type(value))
+                
+    #     https://stackoverflow.com/questions/45441885/how-can-i-create-a-dropdown-menu-from-a-list-in-tkinter
 
 root = tk.Tk()
 App(root).pack()
