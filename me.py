@@ -75,7 +75,7 @@ class The_App():
             
 
         self.tree.grid(row=0, column=0, sticky='nsew')
-        btn = tk.Button(self.root, text = 'Run Test case', bd = '1',command =Run_test)
+        btn = tk.Button(self.root, text = 'Run Test Suite', bd = '1',command =Run_test)
         btn.place(x=625, y=20)
 
 # add a scrollbar
