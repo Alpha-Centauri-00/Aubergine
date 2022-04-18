@@ -1,3 +1,5 @@
+from turtle import st
+from unicodedata import name
 from robot.running import TestSuiteBuilder
 from robot.model import SuiteVisitor
 import glob
@@ -11,8 +13,8 @@ class TestCasesFinder(SuiteVisitor):
         self.tests.append(test)
     
     
-    def get_all_files(self):
-        self.files = glob.glob("*.robot")
+    def get_all_files(self, selected_testcase:str):
+        self.files = glob.glob(selected_testcase)
         self.contacts = []
         for n in self.files:
             self.contacts.append(n)
@@ -22,11 +24,4 @@ class TestCasesFinder(SuiteVisitor):
                 self.testsuite = self.builder.build(str(i))
                 self.testsuite.visit(self.finder)
                 self.testname = self.finder.tests
-                for d in self.testname:
-                    print(n,d)
-                    #return n,d
-            
-            
-d = TestCasesFinder()
-d.get_all_files()
-        
+                return self.testname
