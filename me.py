@@ -9,6 +9,7 @@ import os
 import sys
 from datetime import datetime, timedelta
 from threading import Timer
+import test_tree
 #from numpy import var
 #from click import command
 #from setuptools import Command
@@ -19,7 +20,7 @@ class The_App():
         
         self.root = tk.Tk()
         self.root.title('Run Robot Test Cases')
-        self.root.geometry('720x200')
+        self.root.geometry('1020x400')
         self.columns = ('first_name')   # define columns
         self.tree = ttk.Treeview(self.root)
         #self.tree.heading('first_name', text='Test Cases')  # define headings
@@ -56,11 +57,21 @@ class The_App():
             for item in self.tree.selection():
                     item_text = self.tree.item(item)
                     text_is = item_text['values']
-                    my_label.config(text=text_is)
+                    test_case = ""
+                    for ite in text_is:
+                        test_case= test_case+ite+" "
+                        d = test_tree.TestCasesFinder()
+                        d.get_all_files(test_case)
+                        testing = d.get_all_files(test_case)
+                        listy = []
+                        listy.append(testing)
+                        check_box_test_cases.config(text=listy)
             
 
-        my_label = ttk.Label(self.root,text="")
-        my_label.place(x=400, y=20)
+        #my_label = ttk.Label(self.root,text="")
+        #my_label.place(x=400, y=20)
+        check_box_test_cases = tk.Checkbutton(self.root,text="None")
+        check_box_test_cases.place(x=400,y=20)
         self.tree.bind('<<TreeviewSelect>>', item_selected_)
 
 
@@ -76,7 +87,7 @@ class The_App():
 
         self.tree.grid(row=0, column=0, sticky='nsew')
         btn = tk.Button(self.root, text = 'Run Test Suite', bd = '1',command =Run_test)
-        btn.place(x=625, y=20)
+        btn.place(x=1625, y=20)
 
 # add a scrollbar
         scrollbar = ttk.Scrollbar(self.root, orient=tk.VERTICAL, command=self.tree.yview)
