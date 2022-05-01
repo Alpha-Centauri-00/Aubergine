@@ -65,8 +65,13 @@ class The_App():
                         testing = d.get_all_files(test_case)
                         listy = []
                         listy.append(testing)
-                        check_box_test_cases.config(text=listy)
-            
+                        #check_box_test_cases.config(text=listy)
+                        placement=20
+                        for tasks in testing:
+                                
+                            tk.Checkbutton(self.root,text=str(tasks)).place(x=400,y=placement,)
+                            placement+=20
+                        
 
         #my_label = ttk.Label(self.root,text="")
         #my_label.place(x=400, y=20)
