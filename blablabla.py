@@ -17,16 +17,6 @@ class TestCasesFinder(SuiteVisitor):
             contacts.append((f'{n}'))
         return contacts
 
-# builder = TestSuiteBuilder()
-# all_test_suites = TestCasesFinder.all_robot_files()
-# #print(all_test_suites)
-# for test_suite in all_test_suites:
-#     testsuite = builder.build(test_suite)
-#     finder = TestCasesFinder()
-#     testsuite.visit(finder)
-
-#     print(type(finder.tests))
-
 
 class View(object):
     def __init__(self, root):
@@ -50,28 +40,20 @@ class View(object):
         self.cl.pack()
         self.cl.hlist.add("CL1", text="checklist1")
         self.cl.setstatus("CL1", "off")
-        
-        name = View.get_test_suites()
+
         builder = TestSuiteBuilder()
         all_test_suites = TestCasesFinder.all_robot_files()
-        #print(all_test_suites)
-        for test_suite in all_test_suites:
-            testsuite = builder.build(test_suite)
-            finder = TestCasesFinder()
-            testsuite.visit(finder)
-
-            print(finder.tests)
-        for test_suits in name:
-            self.cl.hlist.add(f"CL1.({test_suits})", text=test_suits)
-            self.cl.setstatus(f"CL1.({test_suits})", "off")
-            for x in finder.tests:
-                self.cl.hlist.add(f"CL1.({test_suits}).{x}", text=x)
-                self.cl.setstatus(f"CL1.({test_suits}).{x}", "off")
-
         
-        #self.cl.hlist.add("CL1.item2", text=View.get_test_suites())
-        #self.cl.setstatus("CL1.item2", "off")
-            
+        for test_suite in all_test_suites:
+            Test_case = builder.build(test_suite)
+            finder = TestCasesFinder()
+            Test_case.visit(finder)
+            self.cl.hlist.add(f"CL1.({Test_case})", text=Test_case)
+            self.cl.setstatus(f"CL1.({Test_case})", "off")
+            for x in finder.tests:
+                self.cl.hlist.add(f"CL1.({Test_case}).{x}", text=x)
+                self.cl.setstatus(f"CL1.({Test_case}).{x}", "off")
+         
         
         self.cl.autosetmode()
 
