@@ -1,6 +1,7 @@
+from lib2to3.pgen2.token import LEFTSHIFT
 from robot.running import TestSuiteBuilder
 from robot.model import SuiteVisitor
-from tkinter import tix as Tix
+from tkinter import LEFT, TOP, tix as Tix
 import glob
 
 class TestCasesFinder(SuiteVisitor):
@@ -37,7 +38,7 @@ class View(object):
 
     def makeCheckList(self):
         self.cl = Tix.CheckList(self.root, browsecmd=self.selectItem)
-        self.cl.pack()
+        self.cl.pack(side=LEFT,ipadx=100,ipady=75)
         self.cl.hlist.add("CL1", text="checklist1")
         self.cl.setstatus("CL1", "off")
 
