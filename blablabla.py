@@ -38,8 +38,12 @@ class View(object):
 
     def makeCheckList(self):
         self.cl = Tix.CheckList(self.root, browsecmd=self.selectItem)
-        self.cl.pack(side=LEFT,ipadx=100,ipady=75)
+
+        self.cl.pack(side="left",ipadx=100,ipady=75)
         self.cl.hlist.add("CL1", text="checklist1")
+        self.cl.hlist.config(bg='#aaa', bd=1, selectmode='none', selectbackground='#aaa',
+                                selectforeground='black', drawbranch=True, pady=5, header=True)
+
         self.cl.setstatus("CL1", "off")
 
         builder = TestSuiteBuilder()
